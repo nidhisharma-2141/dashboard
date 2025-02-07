@@ -377,6 +377,134 @@
         }
         .accept { background-color: #008CBA; }
         .delete-selected { background-color: #f44336; }
+
+
+
+        /* style for sales content*/
+        .sales-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        
+        .sales-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .sales-header select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+            cursor: pointer;
+        }
+        
+        .sales-boxes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .sales-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #2571e8; /* Added border */
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .sales-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 15px rgba(37, 83, 181, 0.2);
+            border-color: #1e56b1; /* Darker shade on hover */
+        }
+        
+        .sales-card h6 {
+            color: #777;
+            font-size: 14px;
+        }
+        
+        .sales-card p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .sales-details {
+            display: none;
+            margin-top: 20px;
+            gap: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .sales-box select {
+            margin-top: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+        
+        .sales-table-container {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        
+        th {
+            background-color: #f4f4f4;
+        }
+        
+        @media (max-width: 768px) {
+            .sales-container {
+                padding: 15px;
+            }
+        
+            .sales-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        
+            .sales-boxes {
+                grid-template-columns: 1fr;
+            }
+        
+            .sales-details {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
     </style>
      
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -463,7 +591,7 @@
                 </li>
                 <ul class="dropdown-menu" id="sales-menu">
                     <li onclick="setActive(this)" data-page-name="sales_overview"> Sales Overview</li>
-                    <li onclick="setActive(this)" data-page-name="manage_sales">Manage Sales</li>
+                    <li onclick="setActive(this)" data-page-name="sales_manage">Manage Sales</li>
                 </ul>
                 <!-- Student Dropdown -->
                 <li class="dropdown-toggle" onclick="toggleDropdown('student-menu', this)"><span class="fas fa-user-circle"></span> 
@@ -526,23 +654,23 @@
                     <h6>Total Manager</h6>
                     <p>80L</p>
                 </div>
-                <div class="card" data-page-name="sales">
+                <div class="card" data-page-name="sales_total">
                     <h6>Total Sale</h6>
                     <p>10L</p>
                 </div>
-                <div class="card" data-page-name="sales">
+                <div class="card" data-page-name="sales_yearly">
                     <h6>Yearly Sale</h6>
                     <p>10.2k</p>
                 </div>
-                <div class="card" data-page-name="sales">
+                <div class="card" data-page-name="sales_monthly">
                     <h6>Monthly Sale</h6>
                     <p>4.2k</p>
                 </div>
-                <div class="card" data-page-name="sales">
+                <div class="card" data-page-name="sales_weekly">
                     <h6>Weekly Sale</h6>
                     <p>80L</p>
                 </div>
-                <div class="card" data-page-name="sales">
+                <div class="card" data-page-name="sales_daily">
                     <h6>Daily Sale</h6>
                     <p>10L</p>
                 </div>
@@ -969,116 +1097,7 @@
         </div>
 
         <!--content current page of card sales-->
-        <div class="content current_page_action hidden"  data-page-name="sales">
-            <h3>&nbsp;Sales</h3>
-            <div class="container">
-                <div class="header">
-                      <button class="add-button">Add +</button>
-                </div>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>S.No</th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>Password</th>
-                      <th>Admin Code</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>mona</td>
-                      <td>mona@example.com</td>
-                      <td>password123</td>
-                      <td>ADM001</td>
-                      <td class="action-buttons">
-                        <a href="#" class="edit-icon"></a>
-                        <a href="#" class="delete-icon"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>MONA SINGH</td>
-                      <td>mona2021cs146@abesit.edu.in</td>
-                      <td>password456</td>
-                      <td>SPC002</td>
-                      <td class="action-buttons">
-                        <a href="#" class="edit-icon"></a>
-                        <a href="#" class="delete-icon"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>divyansh</td>
-                      <td>divyansh@gmaail.com</td>
-                      <td>pass789</td>
-                      <td>SPC003</td>
-                      <td class="action-buttons">
-                        <a href="#" class="edit-icon"></a>
-                        <a href="#" class="delete-icon"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>monad</td>
-                      <td>monad@gmail.com</td>
-                      <td>monadpass</td>
-                      <td>ADM004</td>
-                      <td class="action-buttons">
-                        <a href="#" class="edit-icon"></a>
-                        <a href="#" class="delete-icon"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>sona</td>
-                      <td>sona@gmail.com</td>
-                      <td>sonapass</td>
-                      <td>GST005</td>
-                      <td class="action-buttons">
-                        <a href="#" class="edit-icon"></a>
-                        <a href="#" class="delete-icon"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>shubham</td>
-                      <td>shub@gmail.com</td>
-                      <td>shubpass</td>
-                      <td>ADM006</td>
-                      <td class="action-buttons">
-                        <a href="#" class="edit-icon"></a>
-                        <a href="#" class="delete-icon"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>student</td>
-                      <td>stud@gmail.com</td>
-                      <td>studpass</td>
-                      <td>SPC007</td>
-                      <td class="action-buttons">
-                        <a href="#" class="edit-icon"></a>
-                        <a href="#" class="delete-icon"></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>8</td>
-                      <td>priyanshu</td>
-                      <td>priyanshu@iadhik</td>
-                      <td>priyanpass</td>
-                      <td>SPC008</td>
-                      <td class="action-buttons">
-                        <a href="#" class="edit-icon"></a>
-                        <a href="#" class="delete-icon"></a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-            </div>
-        </div>
+        
  
         <!--content current page of  card sales-->
         <div class="content current_page_action hidden"  data-page-name="admin">
@@ -2185,79 +2204,416 @@
           </div>
       </div>
 
-       <!--content current page of sidebar sales overview-->
-      <div class="content current_page_action hidden"  data-page-name="sales_overview">
-        <h3>&nbsp;sales/sales overview</h3>
-        <div class="container">
-            <div class="title">Manage Manager</div>
-            <div class="form-row">
-                <div class="input-group">
-                    <label for="manager-name">Manager Name</label>
-                    <input type="text" id="manager-name" placeholder="Enter Admin name">
-                </div>
-                <div class="input-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter Email">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter Password">
-                </div>
-                <div class="input-group">
-                    <label for="phone">Phone No.</label>
-                    <input type="text" id="phone" placeholder="Enter phone no.">
-                </div>
-            </div>
-            <div class="input-groupp" style="margin-bottom: 20px;">
-                <label for="manager-id">Manager ID</label>
-                <input type="text" id="manager-id" placeholder="Enter Manager ID">
-            </div>
-            <div class="buttons">
-                <button class="save-btn">Save</button>
-            </div>
-        </div>
-    </div>
+      
 
        <!--content current page of sidebar sales manage-->
-       <div class="content current_page_action hidden"  data-page-name="manage_sales">
-        <h3>&nbsp;sales/sales manage</h3>
-        <div class="container">
-            <div class="title">Manage Manager</div>
-            <div class="form-row">
-                <div class="input-group">
-                    <label for="manager-name">Manager Name</label>
-                    <input type="text" id="manager-name" placeholder="Enter Admin name">
+       <div class="content current_page_action hidden" data-page-name="sales_overview">
+        <h3>&nbsp;Sales Overview</h3>
+        <div class="sales-container">
+            <div class="sales-header">
+                <select class="salesFilter">
+                    <option value="none">None</option>
+                    <option value="all">All</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                </select>
+            </div>
+            <div class="sales-boxes">
+                <div class="sales-card" data-category="yearly" onclick="showSalesData('yearly', this)">
+                    <h6>Yearly Sales</h6>
+                    <p>50M</p>
                 </div>
-                <div class="input-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="Enter Email">
+                <div class="sales-card" data-category="monthly" onclick="showSalesData('monthly', this)">
+                    <h6>Monthly Sales</h6>
+                    <p>4.2M</p>
+                </div>
+                <div class="sales-card" data-category="weekly" onclick="showSalesData('weekly', this)">
+                    <h6>Weekly Sales</h6>
+                    <p>1.2M</p>
+                </div>
+                <div class="sales-card" data-category="daily" onclick="showSalesData('daily', this)">
+                    <h6>Daily Sales</h6>
+                    <p>120k</p>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter Password">
+            <div class="sales-details">
+                <div class="sales-box">
+                    <h6>Total IT Sales</h6>
+                    <p class="it-sales-value">-</p>
+                    <select class="it-subjects" onchange="updateTable('it', this)"></select>
                 </div>
-                <div class="input-group">
-                    <label for="phone">Phone No.</label>
-                    <input type="text" id="phone" placeholder="Enter phone no.">
+                <div class="sales-box">
+                    <h6>Total Management Sales</h6>
+                    <p class="management-sales-value">-</p>
+                    <select class="management-subjects" onchange="updateTable('management', this)"></select>
                 </div>
             </div>
-            <div class="input-groupp" style="margin-bottom: 20px;">
-                <label for="manager-id">Manager ID</label>
-                <input type="text" id="manager-id" placeholder="Enter Manager ID">
+            <div class="sales-table-container">
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
-            <div class="buttons">
-                <button class="save-btn">Save</button>
+        </div>
+    </div>
+    <!--sales total dashboard-->
+    <div class="content current_page_action hidden" data-page-name="sales_total">
+        <h3>&nbsp;Sales total</h3>
+        <div class="sales-container">
+            <div class="sales-header">
+                <select class="salesFilter">
+                    <option value="none">None</option>
+                    <option value="all">All</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                </select>
+            </div>
+            <div class="sales-boxes">
+                <div class="sales-card" data-category="yearly" onclick="showSalesData('yearly', this)">
+                    <h6>Yearly Sales</h6>
+                    <p>50M</p>
+                </div>
+                <div class="sales-card" data-category="monthly" onclick="showSalesData('monthly', this)">
+                    <h6>Monthly Sales</h6>
+                    <p>4.2M</p>
+                </div>
+                <div class="sales-card" data-category="weekly" onclick="showSalesData('weekly', this)">
+                    <h6>Weekly Sales</h6>
+                    <p>1.2M</p>
+                </div>
+                <div class="sales-card" data-category="daily" onclick="showSalesData('daily', this)">
+                    <h6>Daily Sales</h6>
+                    <p>120k</p>
+                </div>
+            </div>
+            <div class="sales-details">
+                <div class="sales-box">
+                    <h6>Total IT Sales</h6>
+                    <p class="it-sales-value">-</p>
+                    <select class="it-subjects" onchange="updateTable('it', this)"></select>
+                </div>
+                <div class="sales-box">
+                    <h6>Total Management Sales</h6>
+                    <p class="management-sales-value">-</p>
+                    <select class="management-subjects" onchange="updateTable('management', this)"></select>
+                </div>
+            </div>
+            <div class="sales-table-container">
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
 
+    <!--sales yearly dashboard-->
+    <div class="content current_page_action hidden" data-page-name="sales_yearly">
+        <h3>&nbsp;Sales Yearly</h3>
+        <div class="sales-container">
+            <div class="sales-header">
+                <select class="salesFilter">
+                    <option value="none">None</option>
+                    <option value="all">All</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                </select>
+            </div>
+            <div class="sales-boxes">
+                <div class="sales-card" data-category="yearly" onclick="showSalesData('yearly', this)">
+                    <h6>Yearly Sales</h6>
+                    <p>50M</p>
+                </div>
+                <div class="sales-card" data-category="monthly" onclick="showSalesData('monthly', this)">
+                    <h6>Monthly Sales</h6>
+                    <p>4.2M</p>
+                </div>
+                <div class="sales-card" data-category="weekly" onclick="showSalesData('weekly', this)">
+                    <h6>Weekly Sales</h6>
+                    <p>1.2M</p>
+                </div>
+                <div class="sales-card" data-category="daily" onclick="showSalesData('daily', this)">
+                    <h6>Daily Sales</h6>
+                    <p>120k</p>
+                </div>
+            </div>
+            <div class="sales-details">
+                <div class="sales-box">
+                    <h6>Total IT Sales</h6>
+                    <p class="it-sales-value">-</p>
+                    <select class="it-subjects" onchange="updateTable('it', this)"></select>
+                </div>
+                <div class="sales-box">
+                    <h6>Total Management Sales</h6>
+                    <p class="management-sales-value">-</p>
+                    <select class="management-subjects" onchange="updateTable('management', this)"></select>
+                </div>
+            </div>
+            <div class="sales-table-container">
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <script>    
+    <!--sales monthly dashboard-->
+    <div class="content current_page_action hidden" data-page-name="sales_monthly">
+        <h3>&nbsp;Sales Monthly</h3>
+        <div class="sales-container">
+            <div class="sales-header">
+                <select class="salesFilter">
+                    <option value="none">None</option>
+                    <option value="all">All</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                </select>
+            </div>
+            <div class="sales-boxes">
+                <div class="sales-card" data-category="yearly" onclick="showSalesData('yearly', this)">
+                    <h6>Yearly Sales</h6>
+                    <p>50M</p>
+                </div>
+                <div class="sales-card" data-category="monthly" onclick="showSalesData('monthly', this)">
+                    <h6>Monthly Sales</h6>
+                    <p>4.2M</p>
+                </div>
+                <div class="sales-card" data-category="weekly" onclick="showSalesData('weekly', this)">
+                    <h6>Weekly Sales</h6>
+                    <p>1.2M</p>
+                </div>
+                <div class="sales-card" data-category="daily" onclick="showSalesData('daily', this)">
+                    <h6>Daily Sales</h6>
+                    <p>120k</p>
+                </div>
+            </div>
+            <div class="sales-details">
+                <div class="sales-box">
+                    <h6>Total IT Sales</h6>
+                    <p class="it-sales-value">-</p>
+                    <select class="it-subjects" onchange="updateTable('it', this)"></select>
+                </div>
+                <div class="sales-box">
+                    <h6>Total Management Sales</h6>
+                    <p class="management-sales-value">-</p>
+                    <select class="management-subjects" onchange="updateTable('management', this)"></select>
+                </div>
+            </div>
+            <div class="sales-table-container">
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--sales weekly dashboard-->
+    <div class="content current_page_action hidden" data-page-name="sales_weekly">
+        <h3>&nbsp;Sales Weekly</h3>
+        <div class="sales-container">
+            <div class="sales-header">
+                <select class="salesFilter">
+                    <option value="none">None</option>
+                    <option value="all">All</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                </select>
+            </div>
+            <div class="sales-boxes">
+                <div class="sales-card" data-category="yearly" onclick="showSalesData('yearly', this)">
+                    <h6>Yearly Sales</h6>
+                    <p>50M</p>
+                </div>
+                <div class="sales-card" data-category="monthly" onclick="showSalesData('monthly', this)">
+                    <h6>Monthly Sales</h6>
+                    <p>4.2M</p>
+                </div>
+                <div class="sales-card" data-category="weekly" onclick="showSalesData('weekly', this)">
+                    <h6>Weekly Sales</h6>
+                    <p>1.2M</p>
+                </div>
+                <div class="sales-card" data-category="daily" onclick="showSalesData('daily', this)">
+                    <h6>Daily Sales</h6>
+                    <p>120k</p>
+                </div>
+            </div>
+            <div class="sales-details">
+                <div class="sales-box">
+                    <h6>Total IT Sales</h6>
+                    <p class="it-sales-value">-</p>
+                    <select class="it-subjects" onchange="updateTable('it', this)"></select>
+                </div>
+                <div class="sales-box">
+                    <h6>Total Management Sales</h6>
+                    <p class="management-sales-value">-</p>
+                    <select class="management-subjects" onchange="updateTable('management', this)"></select>
+                </div>
+            </div>
+            <div class="sales-table-container">
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--sales daily dashboard-->
+    <div class="content current_page_action hidden" data-page-name="sales_daily">
+        <h3>&nbsp;Sales Daily</h3>
+        <div class="sales-container">
+            <div class="sales-header">
+                <select class="salesFilter">
+                    <option value="none">None</option>
+                    <option value="all">All</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                </select>
+            </div>
+            <div class="sales-boxes">
+                <div class="sales-card" data-category="yearly" onclick="showSalesData('yearly', this)">
+                    <h6>Yearly Sales</h6>
+                    <p>50M</p>
+                </div>
+                <div class="sales-card" data-category="monthly" onclick="showSalesData('monthly', this)">
+                    <h6>Monthly Sales</h6>
+                    <p>4.2M</p>
+                </div>
+                <div class="sales-card" data-category="weekly" onclick="showSalesData('weekly', this)">
+                    <h6>Weekly Sales</h6>
+                    <p>1.2M</p>
+                </div>
+                <div class="sales-card" data-category="daily" onclick="showSalesData('daily', this)">
+                    <h6>Daily Sales</h6>
+                    <p>120k</p>
+                </div>
+            </div>
+            <div class="sales-details">
+                <div class="sales-box">
+                    <h6>Total IT Sales</h6>
+                    <p class="it-sales-value">-</p>
+                    <select class="it-subjects" onchange="updateTable('it', this)"></select>
+                </div>
+                <div class="sales-box">
+                    <h6>Total Management Sales</h6>
+                    <p class="management-sales-value">-</p>
+                    <select class="management-subjects" onchange="updateTable('management', this)"></select>
+                </div>
+            </div>
+            <div class="sales-table-container">
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!--sales manage dashboard-->
+    <div class="content current_page_action hidden" data-page-name="sales_manage">
+        <h3>&nbsp;Sales Manage</h3>
+        <div class="sales-container">
+            <div class="sales-header">
+                <select class="salesFilter">
+                    <option value="none">None</option>
+                    <option value="all">All</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="daily">Daily</option>
+                </select>
+            </div>
+            <div class="sales-boxes">
+                <div class="sales-card" data-category="yearly" onclick="showSalesData('yearly', this)">
+                    <h6>Yearly Sales</h6>
+                    <p>50M</p>
+                </div>
+                <div class="sales-card" data-category="monthly" onclick="showSalesData('monthly', this)">
+                    <h6>Monthly Sales</h6>
+                    <p>4.2M</p>
+                </div>
+                <div class="sales-card" data-category="weekly" onclick="showSalesData('weekly', this)">
+                    <h6>Weekly Sales</h6>
+                    <p>1.2M</p>
+                </div>
+                <div class="sales-card" data-category="daily" onclick="showSalesData('daily', this)">
+                    <h6>Daily Sales</h6>
+                    <p>120k</p>
+                </div>
+            </div>
+            <div class="sales-details">
+                <div class="sales-box">
+                    <h6>Total IT Sales</h6>
+                    <p class="it-sales-value">-</p>
+                    <select class="it-subjects" onchange="updateTable('it', this)"></select>
+                </div>
+                <div class="sales-box">
+                    <h6>Total Management Sales</h6>
+                    <p class="management-sales-value">-</p>
+                    <select class="management-subjects" onchange="updateTable('management', this)"></select>
+                </div>
+            </div>
+            <div class="sales-table-container">
+                <table class="sales-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Adding click event listeners to cards
             const cards = document.querySelectorAll('.card');
@@ -2309,10 +2665,86 @@
             }
         }
         
-        function toggleSelectAll(source) {
-            let checkboxes = document.querySelectorAll('.row-checkbox');
-            checkboxes.forEach(checkbox => checkbox.checked = source.checked);
+        document.addEventListener('DOMContentLoaded', () => {
+            const salesFilters = document.querySelectorAll('.salesFilter');
+            salesFilters.forEach(filter => {
+                filter.addEventListener('change', function() {
+                    let selectedCategory = this.value;
+                    let salesContainer = this.closest('.sales-container');
+                    let salesCards = salesContainer.querySelectorAll('.sales-card');
+                    salesCards.forEach(card => {
+                        if (selectedCategory === 'none') {
+                            card.style.display = 'none';
+                        } else {
+                            card.style.display = (selectedCategory === 'all' || card.dataset.category === selectedCategory) ? 'block' : 'none';
+                        }
+                    });
+                    salesContainer.querySelector('.sales-details').style.display = 'none';
+                    salesContainer.querySelector('.sales-table-container').style.display = 'none';
+                });
+            });
+        });
+    
+        function showSalesData(type, element) {
+            const salesContainer = element.closest('.sales-container');
+            salesContainer.querySelector('.it-sales-value').innerText = itSalesData[type]['Software Development'] || '-';
+            salesContainer.querySelector('.management-sales-value').innerText = managementSalesData[type]['Finance'] || '-';
+    
+            populateDropdown(salesContainer.querySelector('.it-subjects'), itSubjects);
+            populateDropdown(salesContainer.querySelector('.management-subjects'), managementSubjects);
+    
+            salesContainer.querySelector('.sales-details').style.display = 'flex';
+            salesContainer.querySelector('.sales-table-container').style.display = 'none';
+            salesContainer.querySelector('.sales-details').dataset.type = type;
         }
+    
+        function populateDropdown(dropdown, subjects) {
+            dropdown.innerHTML = '';
+            subjects.forEach(subject => {
+                const option = document.createElement('option');
+                option.value = subject;
+                option.textContent = subject;
+                dropdown.appendChild(option);
+            });
+        }
+    
+        function updateTable(category, element) {
+            const salesContainer = element.closest('.sales-container');
+            const type = salesContainer.querySelector('.sales-details').dataset.type;
+            const subject = element.value;
+            const tableBody = salesContainer.querySelector('.sales-table tbody');
+            tableBody.innerHTML = '';
+    
+            if (subject === 'All') {
+                const data = category === 'it' ? itSalesData[type] : managementSalesData[type];
+                for (let key in data) {
+                    tableBody.innerHTML += `<tr><td>${key}</td><td>${data[key]}</td></tr>`;
+                }
+            } else {
+                const salesValue = (category === 'it' ? itSalesData[type][subject] : managementSalesData[type][subject]) || 'No Data Available';
+                tableBody.innerHTML = `<tr><td>${subject}</td><td>${salesValue}</td></tr>`;
+            }
+    
+            salesContainer.querySelector('.sales-table-container').style.display = 'block';
+        }
+    
+        const itSubjects = ['None', 'All', 'Software Development', 'Networking', 'Cybersecurity'];
+        const managementSubjects = ['None', 'All', 'Finance', 'Human Resources', 'Marketing'];
+    
+        const itSalesData = {
+            yearly: { 'Software Development': '8M', 'Networking': '4M', 'Cybersecurity': '3M' },
+            monthly: { 'Software Development': '800K', 'Networking': '400K', 'Cybersecurity': '300K' },
+            weekly: { 'Software Development': '200K', 'Networking': '100K', 'Cybersecurity': '50K' },
+            daily: { 'Software Development': '50K', 'Networking': '30K', 'Cybersecurity': '20K' }
+        };
+    
+        const managementSalesData = {
+            yearly: { 'Finance': '10M', 'Human Resources': '5M', 'Marketing': '5M' },
+            monthly: { 'Finance': '1M', 'Human Resources': '500K', 'Marketing': '500K' },
+            weekly: { 'Finance': '250K', 'Human Resources': '125K', 'Marketing': '125K' },
+            daily: { 'Finance': '70K', 'Human Resources': '40K', 'Marketing': '40K' }
+        };
+        
         
     </script>
 </body>
